@@ -17,11 +17,11 @@ const puppeteer = require('puppeteer');
 
     // Wait for and type into the 'Email' field
     await page.waitForSelector('input[name="email"]', { visible: true });
-    await page.type('input[name="email"]', 'moryossef98@gmail.com'); // Email field
+    await page.type('input[name="email"]', 'm12@gmail.com'); // Email field
 
     // Wait for and type into the 'Phone' field
     await page.waitForSelector('input[name="phone"]', { visible: true });
-    await page.type('input[name="phone"]', '0508311890'); // Phone field
+    await page.type('input[name="phone"]', '0503554239'); // Phone field
 
     // Wait for and type into the 'Company' field
     await page.waitForSelector('input[name="company"]', { visible: true });
