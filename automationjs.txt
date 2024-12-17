@@ -1,0 +1,51 @@
+// This automation file checking site using puppeteer
+// mor yossef - 209514264
+
+// import puppeteer library
+const puppeteer = require('puppeteer');
+
+(async () => {
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+
+    // Navigate to the site
+    await page.goto('https://testsite.getjones.com/ExampleForm/');
+
+    // Step 1: Wait for and type into the 'Name' field
+    await page.waitForSelector('input[name="name"]', { visible: true });
+    await page.type('input[name="name"]', 'Mor Yossef'); // Name field
+
+    // Wait for and type into the 'Email' field
+    await page.waitForSelector('input[name="email"]', { visible: true });
+    await page.type('input[name="email"]', 'moryossef98@gmail.com'); // Email field
+
+    // Wait for and type into the 'Phone' field
+    await page.waitForSelector('input[name="phone"]', { visible: true });
+    await page.type('input[name="phone"]', '0508311890'); // Phone field
+
+    // Wait for and type into the 'Company' field
+    await page.waitForSelector('input[name="company"]', { visible: true });
+    await page.type('input[name="company"]', 'Example'); // Company field
+
+
+    // bonus: Change the "Number of Employees" dropdown list from 1-10 to 51-500
+    await page.waitForSelector('select[name="number_of_employees"]');
+    await page.select('select[name="number_of_employees"]', '51-500');
+
+    // Step 2: Take a screenshot before clicking the “Request a call back” button
+    await page.screenshot({ path: 'before-submit.png' });
+
+
+    // Step 3: Click the "Request a call back" button
+    await page.waitForSelector('button.primary.button');
+    await page.click('button.primary.button');
+
+    // Wait for the "Thank You" page to load
+    await page.waitForNavigation({ waitUntil: 'networkidle0' });
+
+    // Step 4: Write a message when the "thank you" page is loaded
+    console.log('Reached the Thank You page.');
+
+    // Closing the browser
+    await browser.close();
+})();
